@@ -2,7 +2,7 @@ apiVersion: 1
 datasources:
   - name: Zabbix
     type: alexanderzobnin-zabbix-datasource
-    url: http://zabbix-d.telemetrics.tech/api_jsonrpc.php
+    url: http://localhost:5121/api_jsonrpc.php
     jsonData:
       # Zabbix API credentials
       username: Admin
