@@ -34,7 +34,7 @@ $DB['VAULT_KEY_FILE']		= '';
 // $ZBX_SERVER			= '';
 // $ZBX_SERVER_PORT		= '';
 
-$ZBX_SERVER_NAME		= 'Zabbix-Autodeploy';
+$ZBX_SERVER_NAME		= 'Zabbix-Vector';
 
 $IMAGE_FORMAT_DEFAULT	= IMAGE_FORMAT_PNG;
 
