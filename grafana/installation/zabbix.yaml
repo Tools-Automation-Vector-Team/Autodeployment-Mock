@@ -1,0 +1,30 @@
+apiVersion: 1
+datasources:
+  - name: Zabbix
+    type: alexanderzobnin-zabbix-datasource
+    url: http://localhost:5121/api_jsonrpc.php
+    jsonData:
+      # Zabbix API credentials
+      username: Admin
+      # Use API token instead of password
+      useApiToken: true
+      # Trends options
+      trends: true
+      trendsFrom: '7d'
+      trendsRange: '4d'
+      # Cache update interval
+      cacheTTL: '1h'
+      # Alerting options
+      alerting: true
+      addThresholds: false
+      alertingMinSeverity: 3
+      # Disable acknowledges for read-only users
+      disableReadOnlyUsersAck: true
+      # Disable time series data alignment
+      disableDataAlignment: false
+      # Use value mapping from Zabbix
+      useZabbixValueMapping: true
+    secureJsonData:
+      apiToken: d91a84e9fdcf48bef5b2ca9df61e2e2c425d3bc234f48501428feec75e2ab842
+    version: 1
+    editable: false
