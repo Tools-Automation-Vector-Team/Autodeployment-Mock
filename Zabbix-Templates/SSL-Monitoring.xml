@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <template_groups>
+        <template_group>
+            <uuid>a571c0d144b14fd4a87a9d9b2aa9fcd6</uuid>
+            <name>Templates/Applications</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>bc2ab2b9a6b747139b7559a7e82bf140</uuid>
+            <template>SSL Monitoring By Vector</template>
+            <name>SSL Monitoring By Vector</name>
+            <groups>
+                <group>
+                    <name>Templates/Applications</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>c79b2581c16c46c1ab2c1fa6c886f66c</uuid>
+                    <name>Cert: Expires on</name>
+                    <type>EXTERNAL</type>
+                    <key>checkssl.sh[{$WEB.URL}]</key>
+                    <delay>1d</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>days</units>
+                    <description>The date on which the certificate validity period ends.</description>
+                    <timeout>30s</timeout>
+                    <triggers>
+                        <trigger>
+                            <uuid>3489b3001b3744b693962c96dae58d38</uuid>
+                            <expression>last(/SSL Monitoring By Vector/checkssl.sh[{$WEB.URL}])&lt;{$CERT.EXPIRY.WARN}</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>last(/SSL Monitoring By Vector/checkssl.sh[{$WEB.URL}])&gt;{$CERT.EXPIRY.WARN}</recovery_expression>
+                            <name>Cert: SSL certificate expires soon</name>
+                            <event_name>Cert: SSL certificate expires soon for {$WEB.URL} (less than {$CERT.EXPIRY.WARN} days)</event_name>
+                            <opdata>Remaining Days: {ITEM.LASTVALUE}</opdata>
+                            <priority>AVERAGE</priority>
+                            <description>The SSL certificate should be updated or it will become untrusted.</description>
+                            <tags>
+                                <tag>
+                                    <tag>Severity</tag>
+                                    <value>Average</value>
+                                </tag>
+                            </tags>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>c622875fcda1487eb030cebeba597a5e</uuid>
+                    <name>HTTP Version</name>
+                    <type>EXTERNAL</type>
+                    <key>http_version.sh[&quot;{$WEB.URL}&quot;]</key>
+                    <delay>1d</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <timeout>30s</timeout>
+                </item>
+                <item>
+                    <uuid>15e48ee2030e4e2782b33fe1c5103c70</uuid>
+                    <name>Status Code</name>
+                    <type>DEPENDENT</type>
+                    <key>status.code</key>
+                    <delay>0</delay>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.code</parameter>
+                            </parameters>
+                            <error_handler>DISCARD_VALUE</error_handler>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>vu_statuscode.py[{$WEB.URL}]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>1446627342994f008a40642a57fd9716</uuid>
+                    <name>Raw Status</name>
+                    <type>EXTERNAL</type>
+                    <key>vu_statuscode.py[{$WEB.URL}]</key>
+                    <delay>15s</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <timeout>30s</timeout>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$CERT.EXPIRY.WARN}</macro>
+                    <value>7</value>
+                </macro>
+                <macro>
+                    <macro>{$WEB.URL}</macro>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>
