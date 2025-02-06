@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>56be58adf41049cebe3d6ec9f592d18a</uuid>
+            <template>Linux Log Monitoring by Vector</template>
+            <name>Linux Log Monitoring by Vector</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <discovery_rules>
+                <discovery_rule>
+                    <uuid>92e7a8f0c2804bd28835ba6c6f7db485</uuid>
+                    <name>Log_Monitoring</name>
+                    <type>SCRIPT</type>
+                    <key>log.monitoring</key>
+                    <delay>1h</delay>
+                    <params>var obj = JSON.parse(value);
+       var data = obj.rawlog;
+       return data</params>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>42b2ef36088e4e7197aa6e5b7bfe7d5f</uuid>
+                            <name>Log Monitoring: {#NAME}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>log[{#FILE}, {#REGEXP}, {#ENCODING}, {#MAXLINES}, {#MODE}, {#OUTPUT}, {#MAXDELAY}, {#OPTIONS}, {#PERSISTENT_DIR}]</key>
+                            <value_type>LOG</value_type>
+                            <trends>0</trends>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>log</value>
+                                </tag>
+                                <tag>
+                                    <tag>service</tag>
+                                    <value>{#NAME}</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                    <timeout>30s</timeout>
+                    <parameters>
+                        <parameter>
+                            <name>rawlog</name>
+                            <value>{$RAWLOG}</value>
+                        </parameter>
+                    </parameters>
+                    <lld_macro_paths>
+                        <lld_macro_path>
+                            <lld_macro>{#ENCODING}</lld_macro>
+                            <path>$.encoding</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#FILE}</lld_macro>
+                            <path>$.file</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MAXDELAY}</lld_macro>
+                            <path>$.maxdelay</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MAXLINES}</lld_macro>
+                            <path>$.maxlines</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#MODE}</lld_macro>
+                            <path>$.mode</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#NAME}</lld_macro>
+                            <path>$.name</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#OPTIONS}</lld_macro>
+                            <path>$.options</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#OUTPUT}</lld_macro>
+                            <path>$.output</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#PERSISTENT_DIR}</lld_macro>
+                            <path>$.persistent_dir</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#REGEXP}</lld_macro>
+                            <path>$.regexp</path>
+                        </lld_macro_path>
+                    </lld_macro_paths>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.data[*]</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$RAWLOG}</macro>
+                    <description>{   &quot;data&quot;: [     {       &quot;name&quot;: &quot;Name of the service or log being monitored. Example: 'nginx_logs' or 'application_logs'.&quot;,       &quot;file&quot;: &quot;Absolute path to the log file. Can include a regular expression for the file name. Example: '/var/log/nginx/access.log' or '/var/log/*.log'.&quot;,       &quot;regexp&quot;: &quot;Regular expression to filter lines from the log. Only matching lines will be processed. Default: '.*' (matches all lines). Example: 'error' or '^\\[critical\\]'.&quot;,       &quot;encoding&quot;: &quot;Character encoding of the log file. Default: 'UTF-8'. Example: 'UTF-8' or 'UTF-16'.&quot;,       &quot;maxlines&quot;: &quot;Maximum number of new lines processed and sent to the server per second. Default: 100. Example: 50.&quot;,       &quot;mode&quot;: &quot;Mode of processing log data. Default: 'all' (process all lines). Use 'skip' to skip older lines for new items. Example: 'all'.&quot;,       &quot;output&quot;: &quot;Output format for matched text. Default: '\\0' (full matched text). Use '\\1', '\\2', etc., to extract specific regex groups. Example: '\\1'.&quot;,       &quot;maxdelay&quot;: &quot;Maximum delay (in seconds) for processing log lines. Default: 0.0 (no delay). Example: 5.0.&quot;,       &quot;options&quot;: &quot;Options for handling log rotation. Default: 'rotate'. Other values: 'copytruncate', 'mtime-reread', 'mtime-noreread'. Example: 'rotate'.&quot;,       &quot;persistent_dir&quot;: &quot;Directory to store persistent files for tracking log position. Default: '/tmp'. Example: '/var/lib/zabbix/log_pos'.&quot;     }   ] }</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>

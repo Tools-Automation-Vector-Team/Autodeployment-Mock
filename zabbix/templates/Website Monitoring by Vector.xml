@@ -9,9 +9,9 @@
     </template_groups>
     <templates>
         <template>
-            <uuid>074b63106f5e424fb4bd033888ff2b5d</uuid>
-            <template>Website Monitoring by Vector 11</template>
-            <name>Website Monitoring by Vector 11</name>
+            <uuid>b94aec557a444f4c92c16531a9cd91a6</uuid>
+            <template>Website Monitoring by Vector</template>
+            <name>Website Monitoring by Vector</name>
             <groups>
                 <group>
                     <name>Templates/Applications</name>
@@ -19,7 +19,45 @@
             </groups>
             <items>
                 <item>
-                    <uuid>e9bdfab1288c4a81bda73e6694d14841</uuid>
+                    <uuid>fc26512691554b16a71f071d704eb631</uuid>
+                    <name>Broken link counts</name>
+                    <type>DEPENDENT</type>
+                    <key>blk.count</key>
+                    <delay>0</delay>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.Broken_links_count</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>vu_blk.py[{$WEB.URL}]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>8572be1a444f48309a8ed0ce4bf93e2c</uuid>
+                    <name>Broken Links</name>
+                    <type>DEPENDENT</type>
+                    <key>blk.link</key>
+                    <delay>0</delay>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.Broken_Links</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>vu_blk.py[{$WEB.URL}]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>b4e72612f99742998f75dae2c31d6650</uuid>
                     <name>Cert: Expires on</name>
                     <type>EXTERNAL</type>
                     <key>checkssl.sh[{$WEB.URL}]</key>
@@ -30,10 +68,10 @@
                     <timeout>30s</timeout>
                     <triggers>
                         <trigger>
-                            <uuid>7e783984f6444f9d9a2fb045c5bad06a</uuid>
-                            <expression>last(/Website Monitoring by Vector 11/checkssl.sh[{$WEB.URL}])&lt;{$CERT.EXPIRY.WARN}</expression>
+                            <uuid>53fef5c0342444a2a2c6f96a73e02083</uuid>
+                            <expression>last(/Website Monitoring by Vector/checkssl.sh[{$WEB.URL}])&lt;{$CERT.EXPIRY.WARN}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>last(/Website Monitoring by Vector 11/checkssl.sh[{$WEB.URL}])&gt;{$CERT.EXPIRY.WARN}</recovery_expression>
+                            <recovery_expression>last(/Website Monitoring by Vector/checkssl.sh[{$WEB.URL}])&gt;{$CERT.EXPIRY.WARN}</recovery_expression>
                             <name>Cert: SSL certificate expires soon</name>
                             <event_name>Cert: SSL certificate expires soon for {$WEB.URL} (less than {$CERT.EXPIRY.WARN} days)</event_name>
                             <opdata>Remaining Days: {ITEM.LASTVALUE}</opdata>
@@ -49,7 +87,7 @@
                     </triggers>
                 </item>
                 <item>
-                    <uuid>52a42e1e116e4f4a8a5efe056f6b9ffc</uuid>
+                    <uuid>8e12a43a61a647eba5363945cb7be4b9</uuid>
                     <name>DNS Query Time</name>
                     <type>EXTERNAL</type>
                     <key>dns_query_time.sh[&quot;{$WEB.URL}&quot;]</key>
@@ -58,10 +96,10 @@
                     <timeout>30s</timeout>
                     <triggers>
                         <trigger>
-                            <uuid>695b42f039874b159ed309f3125119fa</uuid>
-                            <expression>min(/Website Monitoring by Vector 11/dns_query_time.sh[&quot;{$WEB.URL}&quot;],#3)&gt; {$DNS.QUERY.WARN}</expression>
+                            <uuid>bd477815446144de9d054497506163ee</uuid>
+                            <expression>min(/Website Monitoring by Vector/dns_query_time.sh[&quot;{$WEB.URL}&quot;],#3)&gt; {$DNS.QUERY.WARN}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>min(/Website Monitoring by Vector 11/dns_query_time.sh[&quot;{$WEB.URL}&quot;],#3)&lt;{$DNS.QUERY.WARN}</recovery_expression>
+                            <recovery_expression>min(/Website Monitoring by Vector/dns_query_time.sh[&quot;{$WEB.URL}&quot;],#3)&lt;{$DNS.QUERY.WARN}</recovery_expression>
                             <name>DNS Query Time is High</name>
                             <event_name>DNS Query Time is High for {$WEB.URL} (More than {$DNS.QUERY.WARN} milliseconds)</event_name>
                             <opdata>DNS Query Time: {ITEM.LASTVALUE}</opdata>
@@ -77,7 +115,7 @@
                     </triggers>
                 </item>
                 <item>
-                    <uuid>97cca94ac4794f50897399f0e742111b</uuid>
+                    <uuid>d5bacecb972c48d29b83d0e4777cd559</uuid>
                     <name>HTTP Probe Duration</name>
                     <type>EXTERNAL</type>
                     <key>http_probe.sh[{$WEB.URL}]</key>
@@ -86,10 +124,10 @@
                     <timeout>30s</timeout>
                     <triggers>
                         <trigger>
-                            <uuid>07a35ca1e41d4b99a6d40f70c8c39127</uuid>
-                            <expression>min(/Website Monitoring by Vector 11/http_probe.sh[{$WEB.URL}],#2)&gt;{$HTTP.PROBE.WARN}</expression>
+                            <uuid>e17413d9b35e433193514e65ac4a7dc2</uuid>
+                            <expression>min(/Website Monitoring by Vector/http_probe.sh[{$WEB.URL}],#2)&gt;{$HTTP.PROBE.WARN}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>min(/Website Monitoring by Vector 11/http_probe.sh[{$WEB.URL}],#2)&lt;{$HTTP.PROBE.WARN}</recovery_expression>
+                            <recovery_expression>min(/Website Monitoring by Vector/http_probe.sh[{$WEB.URL}],#2)&lt;{$HTTP.PROBE.WARN}</recovery_expression>
                             <name>HTTP Probe Duration is High</name>
                             <event_name>HTTP Probe Duration is High for {$WEB.URL} (More than {$HTTP.PROBE.WARN} milliseconds)</event_name>
                             <opdata>HTTP Probe Duration: {ITEM.LASTVALUE}</opdata>
@@ -105,7 +143,7 @@
                     </triggers>
                 </item>
                 <item>
-                    <uuid>390453dca3ad4013b92920581cd70a1c</uuid>
+                    <uuid>edc778b857d648db9daf985979b8e241</uuid>
                     <name>HTTP Version</name>
                     <type>EXTERNAL</type>
                     <key>http_version.sh[&quot;{$WEB.URL}&quot;]</key>
@@ -115,7 +153,7 @@
                     <timeout>30s</timeout>
                 </item>
                 <item>
-                    <uuid>b79931668c1042eb93c5a4e261c940e5</uuid>
+                    <uuid>d224b22f8e8e4a4f97d008f0ef812407</uuid>
                     <name>Page Load Time</name>
                     <type>EXTERNAL</type>
                     <key>page_load_time.sh[{$WEB.URL}]</key>
@@ -124,10 +162,10 @@
                     <timeout>30s</timeout>
                     <triggers>
                         <trigger>
-                            <uuid>d720d838992b41ec8d5364018e654536</uuid>
-                            <expression>min(/Website Monitoring by Vector 11/page_load_time.sh[{$WEB.URL}],#2)&gt;{$PAGE.LOAD.WARN}</expression>
+                            <uuid>281238f9e7ce491db1c2b05e9922ba42</uuid>
+                            <expression>min(/Website Monitoring by Vector/page_load_time.sh[{$WEB.URL}],#2)&gt;{$PAGE.LOAD.WARN}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>min(/Website Monitoring by Vector 11/page_load_time.sh[{$WEB.URL}],#2)&lt;{$PAGE.LOAD.WARN}</recovery_expression>
+                            <recovery_expression>min(/Website Monitoring by Vector/page_load_time.sh[{$WEB.URL}],#2)&lt;{$PAGE.LOAD.WARN}</recovery_expression>
                             <name>Page Load Time is High</name>
                             <event_name>Page Load Time is High for {$WEB.URL} (More than {$PAGE.LOAD.WARN} Seconds)</event_name>
                             <opdata>Page Load Time: {ITEM.LASTVALUE}</opdata>
@@ -143,7 +181,7 @@
                     </triggers>
                 </item>
                 <item>
-                    <uuid>f4dcf73f0e0c42f78fda9194748ed190</uuid>
+                    <uuid>db8dbc0858d44e1eba322f78dae94dbf</uuid>
                     <name>Status Code</name>
                     <type>DEPENDENT</type>
                     <key>status.code</key>
@@ -160,46 +198,75 @@
                     <master_item>
                         <key>vu_statuscode.py[{$WEB.URL}]</key>
                     </master_item>
-                    <triggers>
-                        <trigger>
-                            <uuid>7dced41afed64b77b33715692ce89811</uuid>
-                            <expression>min(/Website Monitoring by Vector 11/status.code,#3)&lt;&gt;200</expression>
-                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>min(/Website Monitoring by Vector 11/status.code,#3)=200</recovery_expression>
-                            <name>Website not available</name>
-                            <event_name>{$WEB.URL} is not available</event_name>
-                            <opdata>Status: {ITEM.LASTVALUE}</opdata>
-                            <priority>HIGH</priority>
-                            <tags>
-                                <tag>
-                                    <tag>Severity</tag>
-                                    <value>High</value>
-                                </tag>
-                            </tags>
-                        </trigger>
-                    </triggers>
                 </item>
                 <item>
-                    <uuid>1ae700391bd6498387544785cf0a14a0</uuid>
+                    <uuid>9bce5c8565d348daad51e85d735efd66</uuid>
                     <name>Status ID</name>
                     <type>DEPENDENT</type>
                     <key>status.id</key>
                     <delay>0</delay>
                     <preprocessing>
                         <step>
-                            <type>JSONPATH</type>
+                            <type>JAVASCRIPT</type>
                             <parameters>
-                                <parameter>$.status</parameter>
+                                <parameter>    value = parseFloat(value); // Convert the value to a float
+
+    if (value &gt;= 100 &amp;&amp; value &lt;= 199) {
+        // Informational responses
+        return 2;
+    } else if (value &gt;= 200 &amp;&amp; value &lt;= 299) {
+        // Successful responses
+        return 1;
+    } else if (value &gt;= 300 &amp;&amp; value &lt;= 399) {
+        // Redirects
+        return 3;
+    } else if (value &gt;= 405 &amp;&amp; value &lt;= 499) {
+        // Client errors
+        return 4;
+    } else if ((value &gt;= 500 &amp;&amp; value &lt;= 599) || (value &gt;= 400 &amp;&amp; value &lt;= 404)) {
+        // Server errors and specific range (400-404) for errors
+        return 0;
+    } else {
+        // Handle values outside the specified ranges if needed
+        return 1; // Or some other default value or error handling
+    }</parameter>
                             </parameters>
-                            <error_handler>DISCARD_VALUE</error_handler>
                         </step>
                     </preprocessing>
                     <master_item>
-                        <key>vu_statuscode.py[{$WEB.URL}]</key>
+                        <key>web.test.rspcode[Web Health Check,health check]</key>
                     </master_item>
                 </item>
                 <item>
-                    <uuid>3a86f10b2aad44a18cd96c2df44fcd9f</uuid>
+                    <uuid>f441278c39ce40edbd5febcbdb2889c8</uuid>
+                    <name>Total links</name>
+                    <type>DEPENDENT</type>
+                    <key>total.link.count</key>
+                    <delay>0</delay>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.Total_links</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>vu_blk.py[{$WEB.URL}]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>8a537403eacd41f08a046c3cd250247d</uuid>
+                    <name>RAW BLK</name>
+                    <type>EXTERNAL</type>
+                    <key>vu_blk.py[{$WEB.URL}]</key>
+                    <delay>15m</delay>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <timeout>180s</timeout>
+                </item>
+                <item>
+                    <uuid>5c36ace659d1485684b3afc49b4379dd</uuid>
                     <name>Download Speed</name>
                     <type>EXTERNAL</type>
                     <key>vu_downloadspeed.py[{$WEB.URL}]</key>
@@ -209,10 +276,10 @@
                     <timeout>30s</timeout>
                     <triggers>
                         <trigger>
-                            <uuid>f4648ca97ef6470fa47a1dd38476bc44</uuid>
-                            <expression>min(/Website Monitoring by Vector 11/vu_downloadspeed.py[{$WEB.URL}],#2)&lt; {$DOWNLOAD.SPEED.WARN}</expression>
+                            <uuid>083a6d3205f047f0a470cec66eb2bd9c</uuid>
+                            <expression>min(/Website Monitoring by Vector/vu_downloadspeed.py[{$WEB.URL}],#2)&lt; {$DOWNLOAD.SPEED.WARN}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>min(/Website Monitoring by Vector 11/vu_downloadspeed.py[{$WEB.URL}],#2)&gt;{$DOWNLOAD.SPEED.WARN}</recovery_expression>
+                            <recovery_expression>min(/Website Monitoring by Vector/vu_downloadspeed.py[{$WEB.URL}],#2)&gt;{$DOWNLOAD.SPEED.WARN}</recovery_expression>
                             <name>Download Speed is Low</name>
                             <event_name>Download Speed is Low for {$WEB.URL} (Less than {$DOWNLOAD.SPEED.WARN} Kbps)</event_name>
                             <opdata>Download Speed : {ITEM.LASTVALUE}</opdata>
@@ -228,7 +295,7 @@
                     </triggers>
                 </item>
                 <item>
-                    <uuid>f0e86d84703f4b7f868764efd0720ad4</uuid>
+                    <uuid>2bb51eb63c2a4c1ba9b31a5fa0947ac6</uuid>
                     <name>Reach Time</name>
                     <type>EXTERNAL</type>
                     <key>vu_reachtime.py[{$WEB.URL}]</key>
@@ -237,10 +304,10 @@
                     <timeout>30s</timeout>
                     <triggers>
                         <trigger>
-                            <uuid>20f82d9b48f84093ab3b5d2aa96eb57e</uuid>
-                            <expression>min(/Website Monitoring by Vector 11/vu_reachtime.py[{$WEB.URL}],#2)&gt;{$REACH.TIME.WARN}</expression>
+                            <uuid>6b9b3dd2955446109f1bb6897e6ff1ce</uuid>
+                            <expression>min(/Website Monitoring by Vector/vu_reachtime.py[{$WEB.URL}],#2)&gt;{$REACH.TIME.WARN}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>min(/Website Monitoring by Vector 11/vu_reachtime.py[{$WEB.URL}],#2)&lt;{$REACH.TIME.WARN}</recovery_expression>
+                            <recovery_expression>min(/Website Monitoring by Vector/vu_reachtime.py[{$WEB.URL}],#2)&lt;{$REACH.TIME.WARN}</recovery_expression>
                             <name>Reach Time is High</name>
                             <event_name>Reach Time is High for {$WEB.URL} (More than {$REACH.TIME.WARN} Seconds)</event_name>
                             <opdata>Reach Time: {ITEM.LASTVALUE}</opdata>
@@ -256,25 +323,30 @@
                     </triggers>
                 </item>
                 <item>
-                    <uuid>73abbad759294d8b938028b9d6810640</uuid>
+                    <uuid>a980b90c80854387905849db2c7ae4ae</uuid>
+                    <name>Web Report</name>
+                    <type>EXTERNAL</type>
+                    <key>vu_report.py[{HOST.NAME}]</key>
+                    <delay>1d</delay>
+                    <history>365d</history>
+                    <value_type>LOG</value_type>
+                    <trends>0</trends>
+                    <timeout>180s</timeout>
+                </item>
+                <item>
+                    <uuid>7bc680df553c46dabf40b6a620273fe4</uuid>
                     <name>SSL Handshake Time</name>
                     <type>EXTERNAL</type>
                     <key>vu_ssl_handshake.py[{$WEB.URL}]</key>
                     <value_type>FLOAT</value_type>
                     <units>Seconds</units>
                     <timeout>30s</timeout>
-                    <tags>
-                        <tag>
-                            <tag>component</tag>
-                            <value>ssl</value>
-                        </tag>
-                    </tags>
                     <triggers>
                         <trigger>
-                            <uuid>22af38ad49364b95a8eb339a31c2fa44</uuid>
-                            <expression>min(/Website Monitoring by Vector 11/vu_ssl_handshake.py[{$WEB.URL}],#2)&gt;{$SSL.HANDSHAKE.WARN}</expression>
+                            <uuid>d503bd830ecc46bab83bb3a59800419f</uuid>
+                            <expression>min(/Website Monitoring by Vector/vu_ssl_handshake.py[{$WEB.URL}],#2)&gt;{$SSL.HANDSHAKE.WARN}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>min(/Website Monitoring by Vector 11/vu_ssl_handshake.py[{$WEB.URL}],#2)&lt;{$SSL.HANDSHAKE.WARN}</recovery_expression>
+                            <recovery_expression>min(/Website Monitoring by Vector/vu_ssl_handshake.py[{$WEB.URL}],#2)&lt;{$SSL.HANDSHAKE.WARN}</recovery_expression>
                             <name>SSL Handshake Time is High</name>
                             <event_name>SSL Handshake Time is High for {$WEB.URL} (More than {$SSL.HANDSHAKE.WARN} Seconds)</event_name>
                             <opdata>SSL Handshake Time: {ITEM.LASTVALUE}</opdata>
@@ -290,7 +362,7 @@
                     </triggers>
                 </item>
                 <item>
-                    <uuid>866bced10b7b4212841646a7bd2eb782</uuid>
+                    <uuid>2b5da0b1119e43439bfc570646ed6a60</uuid>
                     <name>Raw Status</name>
                     <type>EXTERNAL</type>
                     <key>vu_statuscode.py[{$WEB.URL}]</key>
@@ -300,7 +372,7 @@
                     <timeout>30s</timeout>
                 </item>
                 <item>
-                    <uuid>b551186baec149dd89a704dfc5527087</uuid>
+                    <uuid>ac85b1a8cc5942238d8995efda1727cc</uuid>
                     <name>Time to First Byte</name>
                     <type>EXTERNAL</type>
                     <key>vu_ttfb.py[{$WEB.URL}]</key>
@@ -309,10 +381,10 @@
                     <timeout>30s</timeout>
                     <triggers>
                         <trigger>
-                            <uuid>43e1dfc4001b4f7fad611e8bf5948329</uuid>
-                            <expression>min(/Website Monitoring by Vector 11/vu_ttfb.py[{$WEB.URL}],#2)&gt;{$TTFB.WARN}</expression>
+                            <uuid>d5a64c6663394d5d81b351bce9bec886</uuid>
+                            <expression>min(/Website Monitoring by Vector/vu_ttfb.py[{$WEB.URL}],#2)&gt;{$TTFB.WARN}</expression>
                             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-                            <recovery_expression>min(/Website Monitoring by Vector 11/vu_ttfb.py[{$WEB.URL}],#2)&lt;{$TTFB.WARN}</recovery_expression>
+                            <recovery_expression>min(/Website Monitoring by Vector/vu_ttfb.py[{$WEB.URL}],#2)&lt;{$TTFB.WARN}</recovery_expression>
                             <name>Time to First Byte Time is High</name>
                             <event_name>Time to First Byte Time is High for {$WEB.URL} (More than {$TTFB.WARN} Seconds)</event_name>
                             <opdata>Time to First Byte Time: {ITEM.LASTVALUE}</opdata>
@@ -327,10 +399,49 @@
                         </trigger>
                     </triggers>
                 </item>
+                <item>
+                    <uuid>ea75227c87c04351a3c2a2bfe95b4b06</uuid>
+                    <name>Website Downtime Count</name>
+                    <type>DEPENDENT</type>
+                    <key>web.down.count</key>
+                    <delay>0</delay>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.data.downtimecount</parameter>
+                            </parameters>
+                            <error_handler>DISCARD_VALUE</error_handler>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>vu_report.py[{HOST.NAME}]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>b8fb3a8305614535a1c9a0ce33b750cd</uuid>
+                    <name>Website Downtime in MM:SS</name>
+                    <type>DEPENDENT</type>
+                    <key>web.down.time</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.data.downtime</parameter>
+                            </parameters>
+                            <error_handler>DISCARD_VALUE</error_handler>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>vu_report.py[{HOST.NAME}]</key>
+                    </master_item>
+                </item>
             </items>
             <discovery_rules>
                 <discovery_rule>
-                    <uuid>64e9e4eeed9549868df77b3d1ea4aab6</uuid>
+                    <uuid>85cd9eedef1b4e4f821a8062f0aa8ed5</uuid>
                     <name>WT Discovery</name>
                     <type>SCRIPT</type>
                     <key>wt.discovery</key>
@@ -342,7 +453,7 @@
                     <enabled_lifetime_type>DISABLE_NEVER</enabled_lifetime_type>
                     <item_prototypes>
                         <item_prototype>
-                            <uuid>9c47796a27184b539579779be130f335</uuid>
+                            <uuid>13d21dbcaecd405d9976afe429b560cf</uuid>
                             <name>{#PAGE.NAME} page DNS Time</name>
                             <type>DEPENDENT</type>
                             <key>dns.time[{#PAGE.NAME}]</key>
@@ -370,7 +481,7 @@
                             </tags>
                         </item_prototype>
                         <item_prototype>
-                            <uuid>3169665f67b543f58749796d9569f709</uuid>
+                            <uuid>40e39af8a8d24342b32fd527edf892cb</uuid>
                             <name>{#PAGE.NAME} page Load Time</name>
                             <type>DEPENDENT</type>
                             <key>load.time[{#PAGE.NAME}]</key>
@@ -398,7 +509,7 @@
                             </tags>
                         </item_prototype>
                         <item_prototype>
-                            <uuid>071654112ec94ab7afae182503925b7f</uuid>
+                            <uuid>b9fb9e0194b249a390dee5a87c57052f</uuid>
                             <name>{#PAGE.NAME} page Response Time</name>
                             <type>DEPENDENT</type>
                             <key>response.time[{#PAGE.NAME}]</key>
@@ -426,7 +537,7 @@
                             </tags>
                         </item_prototype>
                         <item_prototype>
-                            <uuid>0f91eba75c694d62baf4648878194118</uuid>
+                            <uuid>488261ee68fc4764a4f0925f80be73ad</uuid>
                             <name>{#PAGE.NAME} page Screenshot</name>
                             <type>DEPENDENT</type>
                             <key>screenshot[{#PAGE.NAME}]</key>
@@ -452,7 +563,37 @@
                             </tags>
                         </item_prototype>
                         <item_prototype>
-                            <uuid>640cb8517a4a466ab657ff4072d9bbed</uuid>
+                            <uuid>aa692cd2eeb7497085f13d24b7516733</uuid>
+                            <name>{#PAGE.NAME} page Status</name>
+                            <type>DEPENDENT</type>
+                            <key>status[{#PAGE.NAME}]</key>
+                            <delay>0</delay>
+                            <value_type>FLOAT</value_type>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <parameters>
+                                        <parameter>$.status</parameter>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>wt.py[{#URL}]</key>
+                            </master_item>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>e3d6750e5f1643568a1c0c1f55152a1c</uuid>
+                                    <expression>last(/Website Monitoring by Vector/status[{#PAGE.NAME}])=0</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>last(/Website Monitoring by Vector/status[{#PAGE.NAME}])=1</recovery_expression>
+                                    <name>{HOST.NAME}'s {#PAGE.NAME} page is not available</name>
+                                    <priority>HIGH</priority>
+                                    <manual_close>YES</manual_close>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>1f2bedf6d6994d7b8f3438e323742f5e</uuid>
                             <name>WT RAW for {#PAGE.NAME}</name>
                             <type>EXTERNAL</type>
                             <key>wt.py[{#URL}]</key>
@@ -469,7 +610,7 @@
                             </tags>
                         </item_prototype>
                     </item_prototypes>
-                    <timeout>40s</timeout>
+                    <timeout>30s</timeout>
                     <parameters>
                         <parameter>
                             <name>wtdata</name>
@@ -499,7 +640,7 @@
             </discovery_rules>
             <httptests>
                 <httptest>
-                    <uuid>3e75297a406b4d4ab1b0d4bd8f214aa1</uuid>
+                    <uuid>c80008b60f934853999b7ac74c4a8aa7</uuid>
                     <name>Web Health Check</name>
                     <delay>15s</delay>
                     <steps>
@@ -513,19 +654,7 @@
             <tags>
                 <tag>
                     <tag>class</tag>
-                    <value>application</value>
-                </tag>
-                <tag>
-                    <tag>class</tag>
-                    <value>webserver</value>
-                </tag>
-                <tag>
-                    <tag>class</tag>
                     <value>website</value>
-                </tag>
-                <tag>
-                    <tag>target</tag>
-                    <value>websites</value>
                 </tag>
             </tags>
             <macros>
@@ -570,6 +699,10 @@
                     <description>Provide Threshold Value</description>
                 </macro>
                 <macro>
+                    <macro>{$WEBSITE.GET.DATA.INTERVAL}</macro>
+                    <value>0s;m/15</value>
+                </macro>
+                <macro>
                     <macro>{$WT.DATA}</macro>
                     <description>{   &quot;data&quot;: [     {       &quot;page_name&quot;: &quot;&lt;name of your website page&gt;&quot;,       &quot;url&quot;: &quot;&lt;link of your page&gt;&quot;     },     {       &quot;page_name&quot;: &quot;&lt;name of second page&gt;&quot;,       &quot;url&quot;: &quot;&lt;link of second page&gt;&quot;     }   ] }</description>
                 </macro>
@@ -578,10 +711,10 @@
     </templates>
     <triggers>
         <trigger>
-            <uuid>662784fc927b4e8e83959b7484572be6</uuid>
-            <expression>min(/Website Monitoring by Vector 11/web.test.time[Web Health Check,health check,resp],#2)&gt;{$RESPONSE.TIME.WARN}</expression>
+            <uuid>49a21c163a1846279d236df2afaf4764</uuid>
+            <expression>min(/Website Monitoring by Vector/web.test.time[Web Health Check,health check,resp],#2)&gt;{$RESPONSE.TIME.WARN}</expression>
             <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
-            <recovery_expression>min(/Website Monitoring by Vector 11/web.test.time[Web Health Check,health check,resp],#2)&lt;{$RESPONSE.TIME.WARN}</recovery_expression>
+            <recovery_expression>min(/Website Monitoring by Vector/web.test.time[Web Health Check,health check,resp],#2)&lt;{$RESPONSE.TIME.WARN}</recovery_expression>
             <name>Response Time is High</name>
             <event_name>Response  Time is High for {$WEB.URL} (More than {$RESPONSE.TIME.WARN} milliseconds)</event_name>
             <opdata>Response Time: {ITEM.LASTVALUE}</opdata>
@@ -591,6 +724,28 @@
                 <tag>
                     <tag>Severity</tag>
                     <value>Warning</value>
+                </tag>
+            </tags>
+        </trigger>
+        <trigger>
+            <uuid>11fbd28030754f80bccf7a163640c817</uuid>
+            <expression>(min(/Website Monitoring by Vector/web.test.rspcode[Web Health Check,health check],#2)&gt;=500 and min(/Website Monitoring by Vector/web.test.rspcode[Web Health Check,health check],#2)&lt;=599) or (min(/Website Monitoring by Vector/web.test.rspcode[Web Health Check,health check],#2)&gt;=400 and min(/Website Monitoring by Vector/web.test.rspcode[Web Health Check,health check],#2)&lt;=404)</expression>
+            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+            <recovery_expression>(min(/Website Monitoring by Vector/web.test.rspcode[Web Health Check,health check],#2)&gt;=100 and min(/Website Monitoring by Vector/web.test.rspcode[Web Health Check,health check],#2)&lt;=399) or (min(/Website Monitoring by Vector/web.test.rspcode[Web Health Check,health check],#2)&gt;=405 and min(/Website Monitoring by Vector/web.test.rspcode[Web Health Check,health check],#2)&lt;=499)</recovery_expression>
+            <name>Website not available</name>
+            <event_name>{$WEB.URL} is not available</event_name>
+            <opdata>Status: {ITEM.LASTVALUE}</opdata>
+            <priority>HIGH</priority>
+            <description>Informational responses (100–199)
+Successful responses (200–299)
+Redirects (300–399)
+Client errors (400–499)
+Server errors (500–599)</description>
+            <manual_close>YES</manual_close>
+            <tags>
+                <tag>
+                    <tag>Severity</tag>
+                    <value>High</value>
                 </tag>
             </tags>
         </trigger>

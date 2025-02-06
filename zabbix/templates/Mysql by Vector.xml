@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.0</version>
+    <template_groups>
+        <template_group>
+            <uuid>e129930b85cf46f2b05b5a4a2fd95d9f</uuid>
+            <name>Vector</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>581f9bfb0db0444e8c3bbbb8d5efc738</uuid>
+            <template>Mysql by Vector</template>
+            <name>Mysql by Vector</name>
+            <groups>
+                <group>
+                    <name>Vector</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>96bd23798a174347afd5563c080aee68</uuid>
+                    <name>Raw Query Data</name>
+                    <type>EXTERNAL</type>
+                    <key>vu_mysql.py[ --dsn,{$MYSQL.DSN}, --user,{$MYSQL.USER}, --password,{$MYSQL.PASSWORD}, --database,&quot;performance_schema&quot;, --query_name,&quot;High-Impact SQL Queries&quot;, --limit,{$LIMIT}]</key>
+                    <delay>30m</delay>
+                    <value_type>TEXT</value_type>
+                    <trends>0</trends>
+                    <timeout>30s</timeout>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <uuid>feefd97b785a4a90a58b9098c49b814b</uuid>
+                    <name>Get Slow Queries</name>
+                    <type>DEPENDENT</type>
+                    <key>slow.queries</key>
+                    <delay>0</delay>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>591ec7ca430f44c59d61d512bb290879</uuid>
+                            <name>Query {#FINGERPRINT} {#DB}</name>
+                            <type>DEPENDENT</type>
+                            <key>query[{#FINGERPRINT}-{#DB}]</key>
+                            <delay>0</delay>
+                            <value_type>TEXT</value_type>
+                            <trends>0</trends>
+                            <preprocessing>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <parameters>
+                                        <parameter>$.data[?(@.Fingerprint == '{#FINGERPRINT}' &amp;&amp; @.SCHEMA_NAME == '{#DB}')]</parameter>
+                                    </parameters>
+                                </step>
+                                <step>
+                                    <type>JSONPATH</type>
+                                    <parameters>
+                                        <parameter>$.[0]</parameter>
+                                    </parameters>
+                                </step>
+                            </preprocessing>
+                            <master_item>
+                                <key>vu_mysql.py[ --dsn,{$MYSQL.DSN}, --user,{$MYSQL.USER}, --password,{$MYSQL.PASSWORD}, --database,&quot;performance_schema&quot;, --query_name,&quot;High-Impact SQL Queries&quot;, --limit,{$LIMIT}]</key>
+                            </master_item>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>queries</value>
+                                </tag>
+                                <tag>
+                                    <tag>slow-queries</tag>
+                                </tag>
+                            </tags>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <uuid>06f4651875fd47c2878b5f9a10c217bd</uuid>
+                                    <expression>jsonpath(last(/Mysql by Vector/query[{#FINGERPRINT}-{#DB}],#1),&quot;$.[\&quot;Avg Latency (ms)\&quot;]&quot;)&gt;3000</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>jsonpath(last(/Mysql by Vector/query[{#FINGERPRINT}-{#DB}],#1),&quot;$.[\&quot;Avg Latency (ms)\&quot;]&quot;)&lt;3000</recovery_expression>
+                                    <name>Slow Query found</name>
+                                    <priority>WARNING</priority>
+                                    <description>{#QUERY}</description>
+                                    <manual_close>YES</manual_close>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <master_item>
+                        <key>vu_mysql.py[ --dsn,{$MYSQL.DSN}, --user,{$MYSQL.USER}, --password,{$MYSQL.PASSWORD}, --database,&quot;performance_schema&quot;, --query_name,&quot;High-Impact SQL Queries&quot;, --limit,{$LIMIT}]</key>
+                    </master_item>
+                    <lld_macro_paths>
+                        <lld_macro_path>
+                            <lld_macro>{#DB}</lld_macro>
+                            <path>$.SCHEMA_NAME</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#FINGERPRINT}</lld_macro>
+                            <path>$.Fingerprint</path>
+                        </lld_macro_path>
+                        <lld_macro_path>
+                            <lld_macro>{#QUERY}</lld_macro>
+                            <path>$.Query</path>
+                        </lld_macro_path>
+                    </lld_macro_paths>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.data[*]</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                </discovery_rule>
+            </discovery_rules>
+            <tags>
+                <tag>
+                    <tag>class</tag>
+                    <value>database</value>
+                </tag>
+            </tags>
+            <macros>
+                <macro>
+                    <macro>{$LIMIT}</macro>
+                    <value>10</value>
+                </macro>
+                <macro>
+                    <macro>{$MYSQL.DSN}</macro>
+                    <value>tcp://140.238.230.93:3306</value>
+                </macro>
+                <macro>
+                    <macro>{$MYSQL.PASSWORD}</macro>
+                    <value>Parkar@1234</value>
+                </macro>
+                <macro>
+                    <macro>{$MYSQL.USER}</macro>
+                    <value>vector</value>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>

@@ -1,0 +1,2704 @@
+zabbix_export:
+  version: '6.4'
+  host_groups:
+    - uuid: 748ad4d098d447d492bb935c907f652f
+      name: Databases
+    - uuid: dc579cd7a1a34222933f24f52a68bcd8
+      name: 'Linux servers'
+    - uuid: 7b12f8a6e95142548a4c653496a5f068
+      name: mock-websites
+    - uuid: d32fa4fd9390433bba197f8258466160
+      name: osi-web
+    - uuid: c8d14bf2f9d64f2a9133142b38150640
+      name: Websites
+    - uuid: 6f6799aa69e844b4b3918f779f2abf08
+      name: 'Zabbix servers'
+  hosts:
+    - host: aajtak
+      name: aajtak
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: mock-websites
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: aajtak.in
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: aajtak.in
+      inventory_mode: DISABLED
+    - host: AAKASH-WIN
+      name: Windows-aakash
+      templates:
+        - name: 'Windows by Zabbix agent'
+      groups:
+        - name: osi-web
+      interfaces:
+        - ip: 10.0.2.15
+          interface_ref: if1
+      inventory_mode: DISABLED
+    - host: advancedphotonix.com
+      name: 'Advanced Photonix'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: advancedphotonix.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: advancedphotonix.com
+      inventory_mode: DISABLED
+    - host: altaflex.com
+      name: Altaflex
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: altaflex.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: altaflex.com
+      inventory_mode: DISABLED
+    - host: aplusproducts.com
+      name: 'Aplus Products'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: aplusproducts.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: aplusproducts.com
+      inventory_mode: DISABLED
+    - host: avms
+      name: AVMS
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'MySQL by Zabbix agent 2'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 192.168.1.235
+          interface_ref: if1
+      tags:
+        - tag: website
+          value: car-rental
+      macros:
+        - macro: '{$MYSQL.DSN}'
+          value: 'tcp://192.168.1.235:3306'
+          description: 'System data source name such as <tcp://host:port or unix:/path/to/socket)/>.'
+        - macro: '{$MYSQL.PASSWORD}'
+          value: Parkar@1234
+          description: 'MySQL user password.'
+        - macro: '{$MYSQL.USER}'
+          value: vector
+          description: 'MySQL user name.'
+        - macro: '{$WEB.URL}'
+          value: avms_web.bhatol.in
+      inventory_mode: DISABLED
+    - host: car-rental
+      name: car-rental
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 192.168.1.228
+          interface_ref: if1
+      macros:
+        - macro: '{$WEB.URL}'
+          value: car-rental.bhatol.in
+      inventory_mode: DISABLED
+    - host: 'Club Manager'
+      name: 'Club Manager'
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'MySQL by Zabbix agent 2'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 192.168.1.232
+          interface_ref: if1
+      macros:
+        - macro: '{$MYSQL.DSN}'
+          value: 'tcp://192.168.1.232:3306'
+          description: 'System data source name such as <tcp://host:port or unix:/path/to/socket)/>.'
+        - macro: '{$MYSQL.PASSWORD}'
+          value: Parkar@1234
+          description: 'MySQL user password.'
+        - macro: '{$MYSQL.USER}'
+          value: vector
+          description: 'MySQL user name.'
+        - macro: '{$WEB.URL}'
+          value: club-manager.bhatol.in
+      inventory_mode: DISABLED
+    - host: conflict.osi-systems.comspacelabs
+      name: 'Conflict OSI-System Spacelabs'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: conflict.osi-systems.com/spacelabs
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: conflict.osi-systems.com/spacelabs
+      inventory_mode: DISABLED
+    - host: Doc-lamp1
+      name: 'Vehicle Parking'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'MySQL by Zabbix agent 2'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 10.61.185.11
+          interface_ref: if1
+      macros:
+        - macro: '{$MYSQL.DSN}'
+          value: 'tcp://10.61.185.11:3306'
+          description: 'System data source name such as <tcp://host:port or unix:/path/to/socket)/>.'
+        - macro: '{$MYSQL.PASSWORD}'
+          value: Parkar@1234
+          description: 'MySQL user password.'
+        - macro: '{$MYSQL.USER}'
+          value: vector
+          description: 'MySQL user name.'
+        - macro: '{$WEB.URL}'
+          value: vehicalparking.telemetrics.tech
+      inventory_mode: DISABLED
+    - host: Doc-lamp2
+      name: 'Car Rental'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'MySQL by Zabbix agent 2'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 10.61.185.12
+          interface_ref: if1
+      items:
+        - name: 'Docker: Architecture'
+          type: DEPENDENT
+          key: docker.architecture
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.Architecture
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: os
+        - name: 'Docker: Cgroup driver'
+          type: DEPENDENT
+          key: docker.cgroup_driver
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.CgroupDriver
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: os
+        - name: 'Docker: Get containers'
+          key: docker.containers
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          interface_ref: if1
+          tags:
+            - tag: component
+              value: raw
+        - name: 'Docker: Containers paused'
+          type: DEPENDENT
+          key: docker.containers.paused
+          delay: '0'
+          history: 7d
+          description: 'Total number of containers paused on this host.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ContainersPaused
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: containers
+        - name: 'Docker: Containers running'
+          type: DEPENDENT
+          key: docker.containers.running
+          delay: '0'
+          history: 7d
+          description: 'Total number of containers running on this host.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ContainersRunning
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: containers
+        - name: 'Docker: Containers stopped'
+          type: DEPENDENT
+          key: docker.containers.stopped
+          delay: '0'
+          history: 7d
+          description: 'Total number of containers stopped on this host.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ContainersStopped
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: containers
+        - name: 'Docker: Containers total'
+          type: DEPENDENT
+          key: docker.containers.total
+          delay: '0'
+          history: 7d
+          description: 'Total number of containers on this host.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.Containers
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: containers
+        - name: 'Docker: Containers size'
+          type: DEPENDENT
+          key: docker.containers_size
+          delay: '0'
+          history: 7d
+          units: B
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.Containers[*].SizeRw.sum()'
+          master_item:
+            key: docker.data_usage
+          tags:
+            - tag: component
+              value: containers
+            - tag: component
+              value: storage
+        - name: 'Docker: CPU CFS Period enabled'
+          type: DEPENDENT
+          key: docker.cpu_cfs_period.enabled
+          delay: '0'
+          history: 7d
+          description: 'https://docs.docker.com/config/containers/resource_constraints/#configure-the-default-cfs-scheduler'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.CpuCfsPeriod
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: cpu
+        - name: 'Docker: CPU CFS Quota enabled'
+          type: DEPENDENT
+          key: docker.cpu_cfs_quota.enabled
+          delay: '0'
+          history: 7d
+          description: 'https://docs.docker.com/config/containers/resource_constraints/#configure-the-default-cfs-scheduler'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.CpuCfsQuota
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: cpu
+        - name: 'Docker: CPU Set enabled'
+          type: DEPENDENT
+          key: docker.cpu_set.enabled
+          delay: '0'
+          history: 7d
+          description: 'https://docs.docker.com/config/containers/resource_constraints/#configure-the-default-cfs-scheduler'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.CPUSet
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: cpu
+        - name: 'Docker: CPU Shares enabled'
+          type: DEPENDENT
+          key: docker.cpu_shares.enabled
+          delay: '0'
+          history: 7d
+          description: 'https://docs.docker.com/config/containers/resource_constraints/#configure-the-default-cfs-scheduler'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.CPUShares
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: cpu
+        - name: 'Docker: Get data_usage'
+          key: docker.data_usage
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          interface_ref: if1
+          tags:
+            - tag: component
+              value: raw
+        - name: 'Docker: Debug enabled'
+          type: DEPENDENT
+          key: docker.debug.enabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.Debug
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: application
+        - name: 'Docker: Default runtime'
+          type: DEPENDENT
+          key: docker.default_runtime
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.DefaultRuntime
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: application
+        - name: 'Docker: Storage driver'
+          type: DEPENDENT
+          key: docker.driver
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          description: |
+            Docker storage driver.
+            https://docs.docker.com/storage/storagedriver/
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.Driver
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: storage
+        - name: 'Docker: Goroutines'
+          type: DEPENDENT
+          key: docker.goroutines
+          delay: '0'
+          history: 7d
+          description: 'Number of goroutines.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.NGoroutines
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: system
+        - name: 'Docker: Get images'
+          key: docker.images
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          interface_ref: if1
+          tags:
+            - tag: component
+              value: raw
+        - name: 'Docker: Images available'
+          type: DEPENDENT
+          key: docker.images.top_level
+          delay: '0'
+          history: 7d
+          description: 'Number of top-level images.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.length()
+          master_item:
+            key: docker.images
+          tags:
+            - tag: component
+              value: images
+        - name: 'Docker: Images total'
+          type: DEPENDENT
+          key: docker.images.total
+          delay: '0'
+          history: 7d
+          description: 'Number of images with intermediate image layers.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.Images
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: images
+        - name: 'Docker: Images size'
+          type: DEPENDENT
+          key: docker.images_size
+          delay: '0'
+          history: 7d
+          units: B
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.Images[*].Size.sum()'
+          master_item:
+            key: docker.data_usage
+          tags:
+            - tag: component
+              value: images
+            - tag: component
+              value: storage
+        - name: 'Docker: Get info'
+          key: docker.info
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+          interface_ref: if1
+          tags:
+            - tag: component
+              value: raw
+        - name: 'Docker: IPv4 Forwarding enabled'
+          type: DEPENDENT
+          key: docker.ipv4_forwarding.enabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.IPv4Forwarding
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: network
+        - name: 'Docker: Kernel memory enabled'
+          type: DEPENDENT
+          key: docker.kernel_mem.enabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.KernelMemory
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: memory
+        - name: 'Docker: Kernel memory TCP enabled'
+          type: DEPENDENT
+          key: docker.kernel_mem_tcp.enabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.KernelMemoryTCP
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: memory
+        - name: 'Docker: Kernel version'
+          type: DEPENDENT
+          key: docker.kernel_version
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.KernelVersion
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: system
+        - name: 'Docker: Layers size'
+          type: DEPENDENT
+          key: docker.layers_size
+          delay: '0'
+          history: 7d
+          units: B
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LayersSize
+          master_item:
+            key: docker.data_usage
+          tags:
+            - tag: component
+              value: storage
+        - name: 'Docker: Live restore enabled'
+          type: DEPENDENT
+          key: docker.live_restore.enabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LiveRestoreEnabled
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: application
+        - name: 'Docker: Logging driver'
+          type: DEPENDENT
+          key: docker.logging_driver
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.LoggingDriver
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: application
+        - name: 'Docker: Memory total'
+          type: DEPENDENT
+          key: docker.mem.total
+          delay: '0'
+          history: 7d
+          units: B
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.MemTotal
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: memory
+        - name: 'Docker: Memory limit enabled'
+          type: DEPENDENT
+          key: docker.mem_limit.enabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.MemoryLimit
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: memory
+        - name: 'Docker: Name'
+          type: DEPENDENT
+          key: docker.name
+          delay: '0'
+          history: 1h
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.Name
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: system
+          triggers:
+            - expression: 'nodata(/Doc-lamp2/docker.name,30m)=1'
+              name: 'Docker: Failed to fetch info data'
+              event_name: 'Docker: Failed to fetch info data (or no data for 30m)'
+              priority: WARNING
+              description: 'Zabbix has not received data for items for the last 30 minutes.'
+              manual_close: 'YES'
+              dependencies:
+                - name: 'Docker: Service is down'
+                  expression: last(/Doc-lamp2/docker.ping)=0
+              tags:
+                - tag: scope
+                  value: availability
+        - name: 'Docker: NCPU'
+          type: DEPENDENT
+          key: docker.ncpu
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.NCPU
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: cpu
+        - name: 'Docker: NEvents listener'
+          type: DEPENDENT
+          key: docker.nevents_listener
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.NEventsListener
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: application
+        - name: 'Docker: Nfd'
+          type: DEPENDENT
+          key: docker.nfd
+          delay: '0'
+          history: 7d
+          description: 'Number of used File Descriptors.'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.NFd
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: os
+        - name: 'Docker: OomKill disabled'
+          type: DEPENDENT
+          key: docker.oomkill.disabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.OomKillDisable
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: system
+        - name: 'Docker: Operating system'
+          type: DEPENDENT
+          key: docker.operating_system
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.OperatingSystem
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: os
+        - name: 'Docker: OS type'
+          type: DEPENDENT
+          key: docker.os_type
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.OSType
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: os
+        - name: 'Docker: Pids limit enabled'
+          type: DEPENDENT
+          key: docker.pids_limit.enabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.PidsLimit
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: system
+        - name: 'Docker: Ping'
+          key: docker.ping
+          history: 7d
+          preprocessing:
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 10m
+          interface_ref: if1
+          tags:
+            - tag: component
+              value: application
+            - tag: component
+              value: health
+          triggers:
+            - expression: last(/Doc-lamp2/docker.ping)=0
+              name: 'Docker: Service is down'
+              priority: AVERAGE
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+        - name: 'Docker: Docker root dir'
+          type: DEPENDENT
+          key: docker.root_dir
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.DockerRootDir
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: system
+        - name: 'Docker: Server version'
+          type: DEPENDENT
+          key: docker.server_version
+          delay: '0'
+          history: 7d
+          trends: '0'
+          value_type: CHAR
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ServerVersion
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: application
+          triggers:
+            - expression: 'last(/Doc-lamp2/docker.server_version,#1)<>last(/Doc-lamp2/docker.server_version,#2) and length(last(/Doc-lamp2/docker.server_version))>0'
+              name: 'Docker: Version has changed'
+              event_name: 'Docker: Version has changed (new version: {ITEM.VALUE})'
+              priority: INFO
+              description: 'Docker version has changed. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: notice
+        - name: 'Docker: Swap limit enabled'
+          type: DEPENDENT
+          key: docker.swap_limit.enabled
+          delay: '0'
+          history: 7d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.SwapLimit
+            - type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+            - type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - 1d
+          master_item:
+            key: docker.info
+          tags:
+            - tag: component
+              value: memory
+            - tag: component
+              value: storage
+        - name: 'Docker: Volumes size'
+          type: DEPENDENT
+          key: docker.volumes_size
+          delay: '0'
+          history: 7d
+          units: B
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.Volumes[*].UsageData.Size.sum()'
+          master_item:
+            key: docker.data_usage
+          tags:
+            - tag: component
+              value: storage
+      discovery_rules:
+        - name: 'Containers discovery'
+          key: 'docker.containers.discovery[false]'
+          delay: 15m
+          filter:
+            evaltype: AND
+            conditions:
+              - macro: '{#NAME}'
+                value: '{$DOCKER.LLD.FILTER.CONTAINER.MATCHES}'
+                formulaid: A
+              - macro: '{#NAME}'
+                value: '{$DOCKER.LLD.FILTER.CONTAINER.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+                formulaid: B
+          description: |
+            Discovery of containers metrics.
+            
+            Parameter:
+            true  - Returns all containers
+            false - Returns only running containers
+          interface_ref: if1
+          item_prototypes:
+            - name: 'Container {#NAME}: Created'
+              type: DEPENDENT
+              key: 'docker.container_info.created["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              units: unixtime
+              preprocessing:
+                - type: JAVASCRIPT
+                  parameters:
+                    - |
+                      var input = JSON.parse(value);
+                        return truncatedTimestamp = Math.floor(Date.parse(input.Created) / 1000) || -1;
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Finished at'
+              type: DEPENDENT
+              key: 'docker.container_info.finished["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: unixtime
+              description: 'Time at which the container last terminated.'
+              preprocessing:
+                - type: JAVASCRIPT
+                  parameters:
+                    - |
+                      var input = JSON.parse(value);
+                        return truncatedTimestamp = Math.floor(Date.parse(input.State.FinishedAt) / 1000) || -1;
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Image'
+              type: DEPENDENT
+              key: 'docker.container_info.image["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              trends: '0'
+              value_type: CHAR
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$[?(@.Names[0] == "{#NAME}")].Image.first()'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: docker.containers
+              tags:
+                - tag: component
+                  value: images
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Restart count'
+              type: DEPENDENT
+              key: 'docker.container_info.restart_count["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.RestartCount
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Started at'
+              type: DEPENDENT
+              key: 'docker.container_info.started["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: unixtime
+              preprocessing:
+                - type: JAVASCRIPT
+                  parameters:
+                    - |
+                      var input = JSON.parse(value);
+                        return truncatedTimestamp = Math.floor(Date.parse(input.State.StartedAt) / 1000) || -1;
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Dead'
+              type: DEPENDENT
+              key: 'docker.container_info.state.dead["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.Dead
+                - type: BOOL_TO_DECIMAL
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Error'
+              type: DEPENDENT
+              key: 'docker.container_info.state.error["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              trends: '0'
+              value_type: CHAR
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.Error
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+              trigger_prototypes:
+                - expression: 'last(/Doc-lamp2/docker.container_info.state.error["{#NAME}"],#1)<>last(/Doc-lamp2/docker.container_info.state.error["{#NAME}"],#2) and length(last(/Doc-lamp2/docker.container_info.state.error["{#NAME}"]))>0'
+                  name: 'Container {#NAME}: An error has occurred in the container'
+                  event_name: 'Container {#NAME}: Version has changed (new version: {ITEM.VALUE})'
+                  priority: WARNING
+                  description: 'Container {#NAME} has an error. Acknowledge to close the problem manually.'
+                  manual_close: 'YES'
+                  tags:
+                    - tag: scope
+                      value: notice
+            - name: 'Container {#NAME}: Exit code'
+              type: DEPENDENT
+              key: 'docker.container_info.state.exitcode["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.ExitCode
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Health failing streak'
+              type: DEPENDENT
+              key: 'docker.container_info.state.health.failing["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.Health.FailingStreak
+                  error_handler: DISCARD_VALUE
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Health status'
+              type: DEPENDENT
+              key: 'docker.container_info.state.health["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              description: 'Container''s `HEALTHCHECK`.'
+              preprocessing:
+                - type: JAVASCRIPT
+                  parameters:
+                    - |
+                      var input = JSON.parse(value);
+                      if (typeof input.State.Health !== 'object' || typeof input.State.Health === 'undefined') {
+                        return 4;
+                      }
+                        return (['starting', 'unhealthy', 'healthy', 'none'].indexOf(input.State.Health.Status) + 1);
+                - type: IN_RANGE
+                  parameters:
+                    - '1'
+                    - '4'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '4'
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+              trigger_prototypes:
+                - expression: 'count(/Doc-lamp2/docker.container_info.state.health["{#NAME}"],2m,,2)>=2'
+                  name: 'Container {#NAME}: Health state container is unhealthy'
+                  opdata: '{ITEM.LASTVALUE1}'
+                  priority: HIGH
+                  description: 'Container health state is unhealthy.'
+                  tags:
+                    - tag: scope
+                      value: availability
+            - name: 'Container {#NAME}: OOMKilled'
+              type: DEPENDENT
+              key: 'docker.container_info.state.oomkilled["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.OOMKilled
+                - type: BOOL_TO_DECIMAL
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Paused'
+              type: DEPENDENT
+              key: 'docker.container_info.state.paused["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.Paused
+                - type: BOOL_TO_DECIMAL
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Pid'
+              type: DEPENDENT
+              key: 'docker.container_info.state.pid["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.Pid
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Restarting'
+              type: DEPENDENT
+              key: 'docker.container_info.state.restarting["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.Restarting
+                - type: BOOL_TO_DECIMAL
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Running'
+              type: DEPENDENT
+              key: 'docker.container_info.state.running["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.Running
+                - type: BOOL_TO_DECIMAL
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Status'
+              type: DEPENDENT
+              key: 'docker.container_info.state.status["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              trends: '0'
+              value_type: CHAR
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.State.Status
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1h
+              master_item:
+                key: 'docker.container_info["{#NAME}",full]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Get info'
+              key: 'docker.container_info["{#NAME}",full]'
+              history: '0'
+              trends: '0'
+              value_type: CHAR
+              description: 'Return low-level information about a container.'
+              interface_ref: if1
+              tags:
+                - tag: component
+                  value: raw
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: CPU percent usage'
+              type: DEPENDENT
+              key: 'docker.container_stats.cpu_pct_usage["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: '%'
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.cpu_stats.cpu_usage.percent_usage
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: cpu
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: CPU kernelmode usage per second'
+              type: DEPENDENT
+              key: 'docker.container_stats.cpu_usage.kernel.rate["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: s
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.cpu_stats.cpu_usage.usage_in_kernelmode
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+                - type: MULTIPLIER
+                  parameters:
+                    - '1.0E-9'
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: cpu
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Throttled periods'
+              type: DEPENDENT
+              key: 'docker.container_stats.cpu_usage.throttled_periods["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              description: 'Number of periods when the container hits its throttling limit.'
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.cpu_stats.throttling_data.throttled_periods
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: cpu
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Throttled time'
+              type: DEPENDENT
+              key: 'docker.container_stats.cpu_usage.throttled_time["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: s
+              description: 'Aggregate time the container was throttled for in nanoseconds.'
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.cpu_stats.throttling_data.throttled_time
+                - type: MULTIPLIER
+                  parameters:
+                    - '1.0E-9'
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: cpu
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Throttling periods'
+              type: DEPENDENT
+              key: 'docker.container_stats.cpu_usage.throttling_periods["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              description: 'Number of periods with throttling active.'
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.cpu_stats.throttling_data.periods
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: cpu
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: CPU total usage per second'
+              type: DEPENDENT
+              key: 'docker.container_stats.cpu_usage.total.rate["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: s
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.cpu_stats.cpu_usage.total_usage
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+                - type: MULTIPLIER
+                  parameters:
+                    - '1.0E-9'
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: cpu
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: CPU usermode usage per second'
+              type: DEPENDENT
+              key: 'docker.container_stats.cpu_usage.user.rate["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: s
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.cpu_stats.cpu_usage.usage_in_usermode
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+                - type: MULTIPLIER
+                  parameters:
+                    - '1.0E-9'
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: cpu
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Memory commit bytes'
+              type: DEPENDENT
+              key: 'docker.container_stats.memory.commit_bytes["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              units: B
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.memory_stats.commitbytes
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: memory
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Memory commit peak bytes'
+              type: DEPENDENT
+              key: 'docker.container_stats.memory.commit_peak_bytes["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              units: B
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.memory_stats.commitpeakbytes
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: memory
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Memory maximum usage'
+              type: DEPENDENT
+              key: 'docker.container_stats.memory.max_usage["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              units: B
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.memory_stats.max_usage
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: memory
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Memory private working set'
+              type: DEPENDENT
+              key: 'docker.container_stats.memory.private_working_set["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              units: B
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.memory_stats.privateworkingset
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: memory
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Memory usage'
+              type: DEPENDENT
+              key: 'docker.container_stats.memory.usage["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              units: B
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.memory_stats.usage
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: memory
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Online CPUs'
+              type: DEPENDENT
+              key: 'docker.container_stats.online_cpus["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.cpu_stats.online_cpus
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: cpu
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Current PIDs count'
+              type: DEPENDENT
+              key: 'docker.container_stats.pids_stats.current["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              description: 'Current number of PIDs the container has created.'
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - $.pids_stats.current
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: system
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Get stats'
+              key: 'docker.container_stats["{#NAME}"]'
+              history: '0'
+              trends: '0'
+              value_type: CHAR
+              description: 'Get container stats based on resource usage.'
+              interface_ref: if1
+              tags:
+                - tag: component
+                  value: raw
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Networks bytes received per second'
+              type: DEPENDENT
+              key: 'docker.networks.rx_bytes["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: B
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.networks[*].rx_bytes.sum()'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '0'
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: network
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Networks incoming packets dropped per second'
+              type: DEPENDENT
+              key: 'docker.networks.rx_dropped["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.networks[*].rx_dropped.sum()'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '0'
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: network
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Networks errors received per second'
+              type: DEPENDENT
+              key: 'docker.networks.rx_errors["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.networks[*].rx_errors.sum()'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '0'
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: network
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Networks packets received per second'
+              type: DEPENDENT
+              key: 'docker.networks.rx_packets["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.networks[*].rx_packets.sum()'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '0'
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: network
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Networks bytes sent per second'
+              type: DEPENDENT
+              key: 'docker.networks.tx_bytes["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              units: B
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.networks[*].tx_bytes.sum()'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '0'
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: network
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Networks outgoing packets dropped per second'
+              type: DEPENDENT
+              key: 'docker.networks.tx_dropped["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.networks[*].tx_dropped.sum()'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '0'
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: network
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Networks errors sent per second'
+              type: DEPENDENT
+              key: 'docker.networks.tx_errors["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.networks[*].tx_errors.sum()'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '0'
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: network
+                - tag: container
+                  value: '{#NAME}'
+            - name: 'Container {#NAME}: Networks packets sent per second'
+              type: DEPENDENT
+              key: 'docker.networks.tx_packets["{#NAME}"]'
+              delay: '0'
+              history: 7d
+              value_type: FLOAT
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.networks[*].tx_packets.sum()'
+                  error_handler: CUSTOM_VALUE
+                  error_handler_params: '0'
+                - type: CHANGE_PER_SECOND
+                  parameters:
+                    - ''
+              master_item:
+                key: 'docker.container_stats["{#NAME}"]'
+              tags:
+                - tag: component
+                  value: network
+                - tag: container
+                  value: '{#NAME}'
+          trigger_prototypes:
+            - expression: 'last(/Doc-lamp2/docker.container_info.state.exitcode["{#NAME}"])>0 and last(/Doc-lamp2/docker.container_info.state.running["{#NAME}"])=0'
+              name: 'Container {#NAME}: Container has been stopped with error code'
+              opdata: 'Exit code: {ITEM.LASTVALUE1}'
+              priority: AVERAGE
+              manual_close: 'YES'
+              tags:
+                - tag: scope
+                  value: availability
+          graph_prototypes:
+            - name: 'Container {#NAME}: CPU usage'
+              type: STACKED
+              graph_items:
+                - drawtype: GRADIENT_LINE
+                  color: 199C0D
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.container_stats.cpu_usage.kernel.rate["{#NAME}"]'
+                - sortorder: '1'
+                  drawtype: GRADIENT_LINE
+                  color: F63100
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.container_stats.cpu_usage.user.rate["{#NAME}"]'
+                - sortorder: '2'
+                  drawtype: GRADIENT_LINE
+                  color: 00611C
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.container_stats.cpu_usage.total.rate["{#NAME}"]'
+            - name: 'Container {#NAME}: Memory usage'
+              graph_items:
+                - drawtype: GRADIENT_LINE
+                  color: 199C0D
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.container_stats.memory.usage["{#NAME}"]'
+                - sortorder: '1'
+                  drawtype: GRADIENT_LINE
+                  color: F63100
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.container_stats.memory.max_usage["{#NAME}"]'
+            - name: 'Container {#NAME}: Network packets'
+              graph_items:
+                - drawtype: BOLD_LINE
+                  color: 199C0D
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.networks.rx_packets["{#NAME}"]'
+                - sortorder: '1'
+                  drawtype: BOLD_LINE
+                  color: F63100
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.networks.tx_packets["{#NAME}"]'
+                - sortorder: '2'
+                  drawtype: BOLD_LINE
+                  color: 00611C
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.networks.rx_errors["{#NAME}"]'
+                - sortorder: '3'
+                  drawtype: BOLD_LINE
+                  color: F7941D
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.networks.tx_errors["{#NAME}"]'
+                - sortorder: '4'
+                  drawtype: BOLD_LINE
+                  color: FC6EA3
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.networks.rx_dropped["{#NAME}"]'
+                - sortorder: '5'
+                  drawtype: BOLD_LINE
+                  color: 6C59DC
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.networks.tx_dropped["{#NAME}"]'
+            - name: 'Container {#NAME}: Network traffic'
+              graph_items:
+                - drawtype: BOLD_LINE
+                  color: 199C0D
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.networks.rx_bytes["{#NAME}"]'
+                - sortorder: '1'
+                  drawtype: BOLD_LINE
+                  color: F63100
+                  item:
+                    host: Doc-lamp2
+                    key: 'docker.networks.tx_bytes["{#NAME}"]'
+        - name: 'Images discovery'
+          key: docker.images.discovery
+          delay: 15m
+          filter:
+            evaltype: AND
+            conditions:
+              - macro: '{#NAME}'
+                value: '{$DOCKER.LLD.FILTER.IMAGE.MATCHES}'
+                formulaid: A
+              - macro: '{#NAME}'
+                value: '{$DOCKER.LLD.FILTER.IMAGE.NOT_MATCHES}'
+                operator: NOT_MATCHES_REGEX
+                formulaid: B
+          description: 'Discovery of images metrics.'
+          interface_ref: if1
+          item_prototypes:
+            - name: 'Image {#NAME}: Created'
+              type: DEPENDENT
+              key: 'docker.image.created["{#ID}"]'
+              delay: '0'
+              history: 7d
+              units: unixtime
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$[?(@.Id == "{#ID}")].Created.first()'
+                - type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - 1d
+              master_item:
+                key: docker.images
+              tags:
+                - tag: component
+                  value: system
+                - tag: image
+                  value: '{#NAME}'
+            - name: 'Image {#NAME}: Size'
+              type: DEPENDENT
+              key: 'docker.image.size["{#ID}"]'
+              delay: '0'
+              history: 7d
+              units: B
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$[?(@.Id == "{#ID}")].Size.first()'
+              master_item:
+                key: docker.images
+              tags:
+                - tag: component
+                  value: storage
+                - tag: image
+                  value: '{#NAME}'
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: carrental.telemetrics.tech
+          description: 'The website DNS name for the connection.'
+        - macro: '{$MYSQL.DSN}'
+          value: 'tcp://10.61.185.12:3306'
+          description: 'System data source name such as <tcp://host:port or unix:/path/to/socket)/>.'
+        - macro: '{$MYSQL.PASSWORD}'
+          value: Parkar@1234
+          description: 'MySQL user password.'
+        - macro: '{$MYSQL.USER}'
+          value: vector
+          description: 'MySQL user name.'
+        - macro: '{$WEB.URL}'
+          value: carrental.telemetrics.tech
+      inventory_mode: DISABLED
+    - host: Doc-lamp3
+      name: 'Hospital Management'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'MySQL by Zabbix agent 2'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 10.61.185.13
+          interface_ref: if1
+      macros:
+        - macro: '{$MYSQL.DSN}'
+          value: 'tcp://10.61.185.13:3306'
+          description: 'System data source name such as <tcp://host:port or unix:/path/to/socket)/>.'
+        - macro: '{$MYSQL.PASSWORD}'
+          value: Parkar@1234
+          description: 'MySQL user password.'
+        - macro: '{$MYSQL.USER}'
+          value: vector
+          description: 'MySQL user name.'
+        - macro: '{$WEB.URL}'
+          value: hospitalmanagement.telemetrics.tech
+      inventory_mode: DISABLED
+    - host: Doc-lamp4
+      name: 'Apartment Visitor'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'MySQL by Zabbix agent 2'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 10.61.185.14
+          interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: visitormanagement.telemetrics.tech
+          description: 'The website DNS name for the connection.'
+        - macro: '{$MYSQL.DSN}'
+          value: 'tcp://10.61.185.14:3306'
+          description: 'System data source name such as <tcp://host:port or unix:/path/to/socket)/>.'
+        - macro: '{$MYSQL.PASSWORD}'
+          value: Parkar@1234
+          description: 'MySQL user password.'
+        - macro: '{$MYSQL.USER}'
+          value: vector
+          description: 'MySQL user name.'
+        - macro: '{$WEB.URL}'
+          value: visitormanagement.telemetrics.tech
+      inventory_mode: DISABLED
+    - host: elearning.spacelabshealthcare.comipadinstall
+      name: 'Elearning Space Labs Pads Install'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: elearning.spacelabshealthcare.com/ipad/install
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: elearning.spacelabshealthcare.com/ipad/install
+      inventory_mode: DISABLED
+    - host: 'GoDaddy VPS Server'
+      name: 'GoDaddy VPS Server'
+      templates:
+        - name: 'Linux by Zabbix agent'
+      groups:
+        - name: 'Zabbix servers'
+      interfaces:
+        - ip: 208.109.235.220
+          interface_ref: if1
+      inventory_mode: DISABLED
+    - host: javatpoint.com
+      name: javatpoint.com
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: mock-websites
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: javatpoint.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: javatpoint.com
+      inventory_mode: DISABLED
+    - host: kb.rapiscansystems.com
+      name: 'Kb.Rapiscan Systems'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: kb.rapiscansystems.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: kb.rapiscansystems.com
+      inventory_mode: DISABLED
+    - host: kb.spacelabshealthcare.com
+      name: 'Kb Space Labs Healthcare'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: kb.spacelabshealthcare.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: kb.spacelabshealthcare.com
+      inventory_mode: DISABLED
+    - host: Lamp1
+      name: Lamp1
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+      groups:
+        - name: osi-web
+      interfaces:
+        - ip: 192.168.1.224
+          interface_ref: if1
+      inventory_mode: DISABLED
+    - host: Lamp2
+      name: Lamp2
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+      groups:
+        - name: osi-web
+      interfaces:
+        - ip: 192.168.1.225
+          interface_ref: if1
+      inventory_mode: DISABLED
+    - host: Lamp3
+      name: Lamp3
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+      groups:
+        - name: osi-web
+      interfaces:
+        - ip: 192.168.1.226
+          interface_ref: if1
+      inventory_mode: DISABLED
+    - host: laserdiode.com
+      name: 'Laser Diode'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: laserdiode.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: laserdiode.com
+      inventory_mode: DISABLED
+    - host: manuals.spacelabshealthcare.com
+      name: 'Manuals Space Labs Healthcare'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: manuals.spacelabshealthcare.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: manuals.spacelabshealthcare.com
+      inventory_mode: DISABLED
+    - host: nucsafe.com
+      name: Nucsafe
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: nucsafe.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: nucsafe.com
+      inventory_mode: DISABLED
+    - host: osi-electronics.uk
+      name: 'osi-electronics uk'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: osi-electronics.uk
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: osi-electronics.uk
+      inventory_mode: DISABLED
+    - host: osi-systems.com
+      name: OSI-Systems
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: osi-systems.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: osi-systems.com
+      inventory_mode: DISABLED
+    - host: osielectronics.com
+      name: 'OSI Electronics'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: osielectronics.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: osielectronics.com
+      inventory_mode: DISABLED
+    - host: osielectronics.comAplus
+      name: 'OSI Electronics Aplus'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: osielectronics.com/Aplus
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: osielectronics.com/Aplus
+      inventory_mode: DISABLED
+    - host: osilaserscan.com
+      name: 'OSI Search'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: osilaserscan.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: osilaserscan.com
+      inventory_mode: DISABLED
+    - host: osioptoelectronics.com
+      name: 'OSI Optoelectronics'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: osioptoelectronics.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: osioptoelectronics.com
+      inventory_mode: DISABLED
+    - host: pfcflex.com
+      name: Pfcflex
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: pfcflex.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: pfcflex.com
+      inventory_mode: DISABLED
+    - host: pw.live
+      name: Physicswallah
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: mock-websites
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: pw.live
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: pw.live
+      inventory_mode: DISABLED
+    - host: qms.rapiscansystems.comfeedback
+      name: 'QMS Rapiscan Systems Feedback'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: qms.rapiscansystems.com/feedback
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: qms.rapiscansystems.com/feedback
+      inventory_mode: DISABLED
+    - host: raggi-x.com
+      name: Raggi-x
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: raggi-x.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: raggi-x.com
+      inventory_mode: DISABLED
+    - host: rapiscansystems.com
+      name: 'Rapiscan Systems'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: rapiscansystems.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: rapiscansystems.com
+      inventory_mode: DISABLED
+    - host: rapiscansystems.com-en
+      name: 'Rapiscan Systems uk'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: rapiscansystems.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: rapiscansystems.com
+      inventory_mode: DISABLED
+    - host: retial-shop
+      name: retial-shop
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+      groups:
+        - name: 'Zabbix servers'
+      interfaces:
+        - ip: 192.168.1.227
+          interface_ref: if1
+      inventory_mode: DISABLED
+    - host: s2eventsecurity.com
+      name: 'S2 EventSecurity'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: s2eventsecurity.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: s2eventsecurity.com
+      inventory_mode: DISABLED
+    - host: s2university.com
+      name: 'S2 University'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: s2university.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: s2university.com
+      inventory_mode: DISABLED
+    - host: sa.spacelabshealthcare.com
+      name: 'Sa Space Labs Healthcare'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: sa.spacelabshealthcare.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: sa.spacelabshealthcare.com
+      inventory_mode: DISABLED
+    - host: screeningsolution.com
+      name: 'Screening Solution'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: screeningsolution.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: screeningsolution.com
+      inventory_mode: DISABLED
+    - host: spacelabshealthcare.com
+      name: 'Space Labs Healthcare'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: spacelabshealthcare.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: spacelabshealthcare.com
+      inventory_mode: DISABLED
+    - host: sscms
+      name: SSCMS
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'MySQL by Zabbix agent 2'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 192.168.1.233
+          interface_ref: if1
+      macros:
+        - macro: '{$MYSQL.DSN}'
+          value: 'tcp://192.168.1.233:3306'
+          description: 'System data source name such as <tcp://host:port or unix:/path/to/socket)/>.'
+        - macro: '{$MYSQL.PASSWORD}'
+          value: Parkar@1234
+          description: 'MySQL user password.'
+        - macro: '{$MYSQL.USER}'
+          value: vector
+          description: 'MySQL user name.'
+        - macro: '{$WEB.URL}'
+          value: sscms.bhatol.in
+      inventory_mode: DISABLED
+    - host: store.rapiscan.com
+      name: 'Store Rapiscan'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: store.rapiscan.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: store.rapiscan.com
+      inventory_mode: DISABLED
+    - host: Telemetrics-server
+      name: Telemetrics-server
+      templates:
+        - name: 'Linux by Zabbix agent'
+      groups:
+        - name: 'Linux servers'
+      interfaces:
+        - ip: 10.61.185.1
+          port: '2408'
+          interface_ref: if1
+      inventory_mode: DISABLED
+    - host: trulink.spacelabshealthcare.com
+      name: 'Trulink Spacelabshealthcare'
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: trulink.spacelabshealthcare.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: trulink.spacelabshealthcare.com
+      inventory_mode: DISABLED
+    - host: vpms
+      name: VPMS
+      proxy:
+        name: 'Zabbix proxy'
+      templates:
+        - name: 'Linux by Zabbix agent'
+        - name: 'MySQL by Zabbix agent 2'
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Databases
+        - name: 'Linux servers'
+        - name: mock-websites
+      interfaces:
+        - ip: 192.168.1.234
+          interface_ref: if1
+      macros:
+        - macro: '{$MYSQL.DSN}'
+          value: 'tcp://192.168.1.234:3306'
+          description: 'System data source name such as <tcp://host:port or unix:/path/to/socket)/>.'
+        - macro: '{$MYSQL.PASSWORD}'
+          value: Parkar@1234
+          description: 'MySQL user password.'
+        - macro: '{$MYSQL.USER}'
+          value: vector
+          description: 'MySQL user name.'
+        - macro: '{$WEB.URL}'
+          value: vpms.bhatol.in
+      inventory_mode: DISABLED
+    - host: w3schools
+      name: w3schools
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: mock-websites
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: w3schools.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: w3schools.com
+      inventory_mode: DISABLED
+    - host: Web
+      name: Web
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: Websites
+      interfaces:
+        - interface_ref: if1
+      httptests:
+        - name: 'Club Manager'
+          delay: 15s
+          agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
+          steps:
+            - name: 'Club Manager'
+              url: 'https://club-manager.bhatol.in/'
+              follow_redirects: 'NO'
+              retrieve_mode: BOTH
+        - name: parkar.digital
+          variables:
+            - name: '{$WEB.URL}'
+              value: 'https://parkar.digital'
+          steps:
+            - name: parkar.digital
+              url: 'https://parkar.digital/'
+              status_codes: '200'
+      inventory_mode: DISABLED
+    - host: www.semicoa.com
+      name: Semicoa
+      templates:
+        - name: 'Website certificate by Zabbix agent 2'
+      groups:
+        - name: osi-web
+      interfaces:
+        - interface_ref: if1
+      macros:
+        - macro: '{$CERT.WEBSITE.HOSTNAME}'
+          value: www.semicoa.com
+          description: 'The website DNS name for the connection.'
+        - macro: '{$WEB.URL}'
+          value: www.semicoa.com
+      inventory_mode: DISABLED
+  graphs:
+    - name: 'Docker: Containers'
+      graph_items:
+        - drawtype: GRADIENT_LINE
+          color: 199C0D
+          item:
+            host: Doc-lamp2
+            key: docker.containers.running
+        - sortorder: '1'
+          drawtype: BOLD_LINE
+          color: F63100
+          item:
+            host: Doc-lamp2
+            key: docker.containers.paused
+        - sortorder: '2'
+          drawtype: BOLD_LINE
+          color: 00611C
+          item:
+            host: Doc-lamp2
+            key: docker.containers.stopped
+        - sortorder: '3'
+          drawtype: BOLD_LINE
+          color: F7941D
+          item:
+            host: Doc-lamp2
+            key: docker.containers.total
+    - name: 'Docker: Goroutines'
+      graph_items:
+        - drawtype: GRADIENT_LINE
+          color: 199C0D
+          item:
+            host: Doc-lamp2
+            key: docker.goroutines
+    - name: 'Docker: Images'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 199C0D
+          item:
+            host: Doc-lamp2
+            key: docker.images.top_level
+        - sortorder: '1'
+          drawtype: BOLD_LINE
+          color: F63100
+          item:
+            host: Doc-lamp2
+            key: docker.images.total
+    - name: 'Docker: Memory total'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 199C0D
+          item:
+            host: Doc-lamp2
+            key: docker.mem.total
+    - name: 'Docker: Size'
+      graph_items:
+        - drawtype: BOLD_LINE
+          color: 199C0D
+          item:
+            host: Doc-lamp2
+            key: docker.images_size
+        - sortorder: '1'
+          drawtype: BOLD_LINE
+          color: F63100
+          item:
+            host: Doc-lamp2
+            key: docker.layers_size
+        - sortorder: '2'
+          drawtype: BOLD_LINE
+          color: 00611C
+          item:
+            host: Doc-lamp2
+            key: docker.containers_size
+        - sortorder: '3'
+          drawtype: BOLD_LINE
+          color: F7941D
+          item:
+            host: Doc-lamp2
+            key: docker.volumes_size
