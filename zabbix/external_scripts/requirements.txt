@@ -1,0 +1,12 @@
+beautifulsoup4
+certifi
+charset-normalizer
+idna
+PyMySQL
+requests
+soupsieve
+urllib3
+pillow
+selenium
+azure-identity
+mysql-connector-python
